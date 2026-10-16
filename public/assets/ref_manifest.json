@@ -1,0 +1,743 @@
+{
+  "ships_and_enemies": {
+    "sheet": "ships_and_enemies",
+    "size": [
+      1536,
+      1024
+    ],
+    "cells": [
+      {
+        "key": "player_ship",
+        "label": "Player Craft: Shinkiro Gilded Astrolabe Fighter",
+        "rect": [
+          20,
+          20,
+          364,
+          321
+        ],
+        "slot_rect": [
+          14,
+          14,
+          370,
+          327
+        ],
+        "center": [
+          192,
+          170
+        ],
+        "emissive_sockets": [
+          {
+            "dx": 0,
+            "dy": -5,
+            "r": 16
+          },
+          {
+            "dx": -23,
+            "dy": 97,
+            "r": 9
+          },
+          {
+            "dx": 23,
+            "dy": 97,
+            "r": 9
+          }
+        ]
+      },
+      {
+        "key": "player_option",
+        "label": "Player Option: Octagonal Brass Incense Satellite",
+        "rect": [
+          404,
+          20,
+          748,
+          321
+        ],
+        "slot_rect": [
+          398,
+          14,
+          754,
+          327
+        ],
+        "center": [
+          576,
+          170
+        ],
+        "emissive_sockets": [
+          {
+            "dx": 0,
+            "dy": 0,
+            "r": 22
+          }
+        ]
+      },
+      {
+        "key": "enemy_scout_a",
+        "label": "Light Automaton A: Vermilion & Brass Swallow Drone",
+        "rect": [
+          788,
+          20,
+          1132,
+          321
+        ],
+        "slot_rect": [
+          782,
+          14,
+          1138,
+          327
+        ],
+        "center": [
+          960,
+          170
+        ],
+        "emissive_sockets": [
+          {
+            "dx": 0,
+            "dy": 0,
+            "r": 15
+          }
+        ]
+      },
+      {
+        "key": "enemy_scout_b",
+        "label": "Light Automaton B: Four-Blade Jade & Brass Spinner",
+        "rect": [
+          1172,
+          20,
+          1516,
+          321
+        ],
+        "slot_rect": [
+          1166,
+          14,
+          1522,
+          327
+        ],
+        "center": [
+          1344,
+          170
+        ],
+        "emissive_sockets": [
+          {
+            "dx": 0,
+            "dy": 0,
+            "r": 20
+          }
+        ]
+      },
+      {
+        "key": "enemy_turret_med",
+        "label": "Medium Automaton: Hexagonal Tri-Cannon Bastion",
+        "rect": [
+          20,
+          361,
+          364,
+          662
+        ],
+        "slot_rect": [
+          14,
+          355,
+          370,
+          668
+        ],
+        "center": [
+          192,
+          511
+        ],
+        "emissive_sockets": [
+          {
+            "dx": 48,
+            "dy": 82,
+            "r": 11
+          },
+          {
+            "dx": 0,
+            "dy": 95,
+            "r": 11
+          },
+          {
+            "dx": -48,
+            "dy": 82,
+            "r": 11
+          },
+          {
+            "dx": 0,
+            "dy": 0,
+            "r": 28
+          }
+        ]
+      },
+      {
+        "key": "enemy_barge_med",
+        "label": "Medium Shrine Barge: Twin-Prong Lacquer Cruiser",
+        "rect": [
+          404,
+          361,
+          748,
+          662
+        ],
+        "slot_rect": [
+          398,
+          355,
+          754,
+          668
+        ],
+        "center": [
+          576,
+          511
+        ],
+        "emissive_sockets": [
+          {
+            "dx": -82,
+            "dy": 68,
+            "r": 14
+          },
+          {
+            "dx": 0,
+            "dy": 68,
+            "r": 14
+          },
+          {
+            "dx": 82,
+            "dy": 68,
+            "r": 14
+          }
+        ]
+      },
+      {
+        "key": "enemy_carrier_heavy",
+        "label": "Heavy Shrine Carrier: Layered Lamellar Gunship",
+        "rect": [
+          788,
+          361,
+          1132,
+          662
+        ],
+        "slot_rect": [
+          782,
+          355,
+          1138,
+          668
+        ],
+        "center": [
+          960,
+          511
+        ],
+        "emissive_sockets": [
+          {
+            "dx": -88,
+            "dy": 68,
+            "r": 15
+          },
+          {
+            "dx": 88,
+            "dy": 68,
+            "r": 15
+          },
+          {
+            "dx": 0,
+            "dy": -8,
+            "r": 20
+          }
+        ]
+      },
+      {
+        "key": "midboss_koumoku",
+        "label": "Midboss Core: Koumoku Four-Armed Brass Guardian",
+        "rect": [
+          1172,
+          361,
+          1516,
+          662
+        ],
+        "slot_rect": [
+          1166,
+          355,
+          1522,
+          668
+        ],
+        "center": [
+          1344,
+          511
+        ],
+        "emissive_sockets": [
+          {
+            "dx": -24,
+            "dy": -8,
+            "r": 11
+          },
+          {
+            "dx": 24,
+            "dy": -8,
+            "r": 11
+          },
+          {
+            "dx": 0,
+            "dy": -52,
+            "r": 13
+          },
+          {
+            "dx": -96,
+            "dy": 62,
+            "r": 14
+          },
+          {
+            "dx": 96,
+            "dy": 62,
+            "r": 14
+          }
+        ]
+      },
+      {
+        "key": "relic_node",
+        "label": "Destructible Relic: Octagonal Jade & Brass Pylon",
+        "rect": [
+          20,
+          702,
+          364,
+          1003
+        ],
+        "slot_rect": [
+          14,
+          696,
+          370,
+          1009
+        ],
+        "center": [
+          192,
+          852
+        ],
+        "emissive_sockets": [
+          {
+            "dx": 0,
+            "dy": 0,
+            "r": 18
+          }
+        ]
+      },
+      {
+        "key": "item_medal",
+        "label": "Collectible Medal: Stamped Antique Gold Sun-Coin",
+        "rect": [
+          404,
+          702,
+          748,
+          1003
+        ],
+        "slot_rect": [
+          398,
+          696,
+          754,
+          1009
+        ],
+        "center": [
+          576,
+          852
+        ],
+        "emissive_sockets": []
+      },
+      {
+        "key": "item_power",
+        "label": "Power Talisman: Ornate Vermilion & Gold Plaque",
+        "rect": [
+          788,
+          702,
+          1132,
+          1003
+        ],
+        "slot_rect": [
+          782,
+          696,
+          1138,
+          1009
+        ],
+        "center": [
+          960,
+          852
+        ],
+        "emissive_sockets": []
+      },
+      {
+        "key": "item_bomb",
+        "label": "Bomb Relic: Carved Celadon Jade & Gold Crescent",
+        "rect": [
+          1172,
+          702,
+          1516,
+          1003
+        ],
+        "slot_rect": [
+          1166,
+          696,
+          1522,
+          1009
+        ],
+        "center": [
+          1344,
+          852
+        ],
+        "emissive_sockets": []
+      }
+    ]
+  },
+  "boss_parts": {
+    "sheet": "boss_parts",
+    "size": [
+      1536,
+      1024
+    ],
+    "cells": [
+      {
+        "key": "boss_hero_anchor",
+        "label": "Assembled Hero Reference of Amaterasu-Automaton",
+        "rect": [
+          20,
+          20,
+          364,
+          492
+        ],
+        "slot_rect": [
+          14,
+          14,
+          370,
+          498
+        ],
+        "center": [
+          192,
+          256
+        ],
+        "pivot": [
+          0,
+          0
+        ],
+        "emissive_sockets": []
+      },
+      {
+        "key": "boss_core_chassis",
+        "label": "Central Octagonal Obsidian & Brass Sanctum Chassis",
+        "rect": [
+          404,
+          20,
+          748,
+          492
+        ],
+        "slot_rect": [
+          398,
+          14,
+          754,
+          498
+        ],
+        "center": [
+          576,
+          256
+        ],
+        "pivot": [
+          0,
+          0
+        ],
+        "emissive_sockets": [
+          {
+            "dx": 0,
+            "dy": 0,
+            "r": 42
+          },
+          {
+            "dx": 96,
+            "dy": 0,
+            "r": 14
+          },
+          {
+            "dx": 0,
+            "dy": 96,
+            "r": 14
+          },
+          {
+            "dx": -96,
+            "dy": 0,
+            "r": 14
+          },
+          {
+            "dx": 0,
+            "dy": -96,
+            "r": 14
+          }
+        ]
+      },
+      {
+        "key": "boss_mask_plate",
+        "label": "White Porcelain & Gold Kintsugi Sun-Deity Mask Plate",
+        "rect": [
+          788,
+          20,
+          1132,
+          492
+        ],
+        "slot_rect": [
+          782,
+          14,
+          1138,
+          498
+        ],
+        "center": [
+          960,
+          256
+        ],
+        "pivot": [
+          0,
+          0
+        ],
+        "emissive_sockets": [
+          {
+            "dx": 0,
+            "dy": -60,
+            "r": 18
+          },
+          {
+            "dx": -38,
+            "dy": -20,
+            "r": 14
+          },
+          {
+            "dx": 38,
+            "dy": -20,
+            "r": 14
+          }
+        ]
+      },
+      {
+        "key": "boss_astrolabe_ring",
+        "label": "Hollow Engraved Brass Astrolabe Ring",
+        "rect": [
+          1172,
+          20,
+          1516,
+          492
+        ],
+        "slot_rect": [
+          1166,
+          14,
+          1522,
+          498
+        ],
+        "center": [
+          1344,
+          256
+        ],
+        "pivot": [
+          0,
+          0
+        ],
+        "emissive_sockets": [
+          {
+            "dx": 127,
+            "dy": 0,
+            "r": 10
+          },
+          {
+            "dx": 90,
+            "dy": 90,
+            "r": 10
+          },
+          {
+            "dx": 0,
+            "dy": 127,
+            "r": 10
+          },
+          {
+            "dx": -90,
+            "dy": 90,
+            "r": 10
+          },
+          {
+            "dx": -127,
+            "dy": 0,
+            "r": 10
+          },
+          {
+            "dx": -90,
+            "dy": -90,
+            "r": 10
+          },
+          {
+            "dx": 0,
+            "dy": -127,
+            "r": 10
+          },
+          {
+            "dx": 90,
+            "dy": -90,
+            "r": 10
+          }
+        ]
+      },
+      {
+        "key": "boss_wing_primary",
+        "label": "Right Primary Mechanical Feather-Wing Pinion",
+        "rect": [
+          20,
+          532,
+          364,
+          1004
+        ],
+        "slot_rect": [
+          14,
+          526,
+          370,
+          1010
+        ],
+        "center": [
+          192,
+          768
+        ],
+        "pivot": [
+          -110,
+          -40
+        ],
+        "emissive_sockets": [
+          {
+            "dx": -110,
+            "dy": -40,
+            "r": 14
+          }
+        ]
+      },
+      {
+        "key": "boss_wing_secondary",
+        "label": "Right Secondary Jade & Brass Lower Fin",
+        "rect": [
+          404,
+          532,
+          748,
+          1004
+        ],
+        "slot_rect": [
+          398,
+          526,
+          754,
+          1010
+        ],
+        "center": [
+          576,
+          768
+        ],
+        "pivot": [
+          -95,
+          -80
+        ],
+        "emissive_sockets": [
+          {
+            "dx": 42,
+            "dy": 52,
+            "r": 16
+          }
+        ]
+      },
+      {
+        "key": "boss_shoulder_turret",
+        "label": "Right Heavy Twin-Barrel Rotary Cannon Pauldron",
+        "rect": [
+          788,
+          532,
+          1132,
+          1004
+        ],
+        "slot_rect": [
+          782,
+          526,
+          1138,
+          1010
+        ],
+        "center": [
+          960,
+          768
+        ],
+        "pivot": [
+          0,
+          -70
+        ],
+        "emissive_sockets": [
+          {
+            "dx": -38,
+            "dy": 158,
+            "r": 16
+          },
+          {
+            "dx": 38,
+            "dy": 158,
+            "r": 16
+          },
+          {
+            "dx": 0,
+            "dy": -70,
+            "r": 24
+          }
+        ]
+      },
+      {
+        "key": "boss_tail_pendulum",
+        "label": "Central Ceremonial Pendulum Spear-Tail",
+        "rect": [
+          1172,
+          532,
+          1516,
+          1004
+        ],
+        "slot_rect": [
+          1166,
+          526,
+          1522,
+          1010
+        ],
+        "center": [
+          1344,
+          768
+        ],
+        "pivot": [
+          0,
+          -165
+        ],
+        "emissive_sockets": [
+          {
+            "dx": 0,
+            "dy": 95,
+            "r": 22
+          }
+        ]
+      }
+    ]
+  },
+  "hud_and_cutin": {
+    "sheet": "hud_and_cutin",
+    "size": [
+      1536,
+      1024
+    ],
+    "cutin_rect": [
+      48,
+      48,
+      732,
+      976
+    ],
+    "hud_frame_rect": [
+      780,
+      40,
+      1496,
+      984
+    ]
+  },
+  "stage_bgs": {
+    "abyss": {
+      "size": [
+        1024,
+        1536
+      ],
+      "ref": "refs/stage_bg_abyss_ref.png"
+    },
+    "sanctum": {
+      "size": [
+        1024,
+        1536
+      ],
+      "ref": "refs/stage_bg_sanctum_ref.png"
+    }
+  }
+}

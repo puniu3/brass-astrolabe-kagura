@@ -1,0 +1,138 @@
+{
+  "ships_and_enemies": {
+    "source_mode": "i2i_codex",
+    "gutter_spill_pct": 0.0004,
+    "magenta_fringe_ratio": 0.0,
+    "cells": {
+      "player_ship": {
+        "raw_centroid_drift_px": 3.57,
+        "post_centroid_drift_px": 0.67,
+        "bbox_iou": 0.974
+      },
+      "player_option": {
+        "raw_centroid_drift_px": 1.16,
+        "post_centroid_drift_px": 0.86,
+        "bbox_iou": 0.411
+      },
+      "enemy_scout_a": {
+        "raw_centroid_drift_px": 1.45,
+        "post_centroid_drift_px": 0.36,
+        "bbox_iou": 0.977
+      },
+      "enemy_scout_b": {
+        "raw_centroid_drift_px": 3.69,
+        "post_centroid_drift_px": 0.91,
+        "bbox_iou": 0.967
+      },
+      "enemy_turret_med": {
+        "raw_centroid_drift_px": 3.15,
+        "post_centroid_drift_px": 0.68,
+        "bbox_iou": 0.992
+      },
+      "enemy_barge_med": {
+        "raw_centroid_drift_px": 1.1,
+        "post_centroid_drift_px": 1.07,
+        "bbox_iou": 0.975
+      },
+      "enemy_carrier_heavy": {
+        "raw_centroid_drift_px": 1.46,
+        "post_centroid_drift_px": 1.61,
+        "bbox_iou": 0.982
+      },
+      "midboss_koumoku": {
+        "raw_centroid_drift_px": 3.86,
+        "post_centroid_drift_px": 0.63,
+        "bbox_iou": 0.992
+      },
+      "relic_node": {
+        "raw_centroid_drift_px": 3.64,
+        "post_centroid_drift_px": 0.87,
+        "bbox_iou": 0.538
+      },
+      "item_medal": {
+        "raw_centroid_drift_px": 1.69,
+        "post_centroid_drift_px": 0.59,
+        "bbox_iou": 0.474
+      },
+      "item_power": {
+        "raw_centroid_drift_px": 5.73,
+        "post_centroid_drift_px": 5.7,
+        "bbox_iou": 0.465
+      },
+      "item_bomb": {
+        "raw_centroid_drift_px": 3.6,
+        "post_centroid_drift_px": 0.92,
+        "bbox_iou": 0.987
+      }
+    }
+  },
+  "boss_parts": {
+    "source_mode": "i2i_codex",
+    "gutter_spill_pct": 0.0,
+    "magenta_fringe_ratio": 0.0,
+    "cells": {
+      "boss_hero_anchor": {
+        "raw_centroid_drift_px": 3.77,
+        "post_centroid_drift_px": 1.8,
+        "bbox_iou": 0.914
+      },
+      "boss_core_chassis": {
+        "raw_centroid_drift_px": 1.3,
+        "post_centroid_drift_px": 0.5,
+        "bbox_iou": 0.994
+      },
+      "boss_mask_plate": {
+        "raw_centroid_drift_px": 8.1,
+        "post_centroid_drift_px": 7.03,
+        "bbox_iou": 0.876
+      },
+      "boss_astrolabe_ring": {
+        "raw_centroid_drift_px": 3.6,
+        "post_centroid_drift_px": 0.27,
+        "bbox_iou": 0.964
+      },
+      "boss_wing_primary": {
+        "raw_centroid_drift_px": 21.31,
+        "post_centroid_drift_px": 9.53,
+        "bbox_iou": 0.709
+      },
+      "boss_wing_secondary": {
+        "raw_centroid_drift_px": 1.46,
+        "post_centroid_drift_px": 1.65,
+        "bbox_iou": 0.984
+      },
+      "boss_shoulder_turret": {
+        "raw_centroid_drift_px": 1.71,
+        "post_centroid_drift_px": 1.7,
+        "bbox_iou": 0.978
+      },
+      "boss_tail_pendulum": {
+        "raw_centroid_drift_px": 3.6,
+        "post_centroid_drift_px": 0.47,
+        "bbox_iou": 0.974
+      }
+    }
+  },
+  "stage_bgs": {
+    "abyss": {
+      "source": "i2i_codex",
+      "size": [
+        1024,
+        1536
+      ],
+      "saturated_blue_ratio": 0.0
+    },
+    "sanctum": {
+      "source": "i2i_codex",
+      "size": [
+        1024,
+        1536
+      ],
+      "saturated_blue_ratio": 0.0
+    }
+  },
+  "hud_and_cutin": {
+    "source": "i2i_codex",
+    "agy_mandala_present": true
+  }
+}

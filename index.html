@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>真鍮天球のカラクリ神楽 — Kagura of the Brass Astrolabe</title>
+  <link rel="stylesheet" href="src/style.css" />
+</head>
+<body>
+  <div id="app-shell">
+    <!-- Playfield (WebGL2 720x960 HDR Canvas) — Zero text or bottom overlays -->
+    <div id="playfield-frame">
+      <div id="loading-banner">天球儀シェーダ・i2i法線アトラス読込中…</div>
+
+      <!-- Only a razor-slim Boss HP bar at the very top rim when Boss/Midboss is active -->
+      <div id="boss-hud-wrap">
+        <div id="boss-hp-track">
+          <div id="boss-hp-fill"></div>
+        </div>
+      </div>
+
+      <canvas id="stg-canvas" width="720" height="960"></canvas>
+    </div>
+
+    <!-- Right HUD Sidebar — Fitted to Human Visual Processing Budget (4 clean chunks) -->
+    <aside id="hud-sidebar">
+      <!-- Chunk 1: Current Stage / Spell Card & Boss Portrait (outside playfield) -->
+      <div id="encounter-card">
+        <div id="boss-portrait-wrap">
+          <img id="cutin-portrait" src="public/assets/boss_cutin.png" alt="Amaterasu-Automaton" />
+        </div>
+        <div id="phase-subtitle">水路アプローチ</div>
+        <div id="phase-title">第一幕：黒曜水路</div>
+        <div class="scene-pills" aria-label="Scene Selector">
+          <span class="scene-label">SCENE</span>
+          <button class="scene-pill active" data-phase-jump="0">1</button>
+          <button class="scene-pill" data-phase-jump="1">2</button>
+          <button class="scene-pill" data-phase-jump="2">3</button>
+          <button class="scene-pill" data-phase-jump="3">4</button>
+          <button class="scene-pill" data-phase-jump="4">5</button>
+        </div>
+      </div>
+
+      <!-- Chunk 2: Score & Resonance Multiplier -->
+      <div class="hud-section">
+        <div class="hud-row-header">
+          <span class="hud-label">SCORE</span>
+          <span class="hud-mult-badge" id="hud-mult">×1.00</span>
+        </div>
+        <div class="hud-score-val" id="hud-score">000,000,000</div>
+      </div>
+
+      <!-- Chunk 3: Vital Survival State (LIFE & WARD) -->
+      <div class="hud-section">
+        <div class="vital-row">
+          <span class="hud-label">LIFE</span>
+          <span class="vital-icons vermilion" id="hud-lives">♥♥♥</span>
+        </div>
+        <div class="vital-row" style="margin-top: 10px;">
+          <span class="hud-label">WARD</span>
+          <span class="vital-icons gold" id="hud-bombs">✦✦✦</span>
+        </div>
+        <div id="hud-bomb-track">
+          <div id="hud-bomb-bar"></div>
+        </div>
+      </div>
+
+      <!-- Chunk 4: Ergonomic Right-Thumb Action + Quiet Utility Menu Trigger -->
+      <div id="thumb-dock">
+        <button class="thumb-btn" id="btn-bomb">結界発動 [X]</button>
+        <button class="menu-trigger-btn" id="btn-inspect-i2i">設定・場面切替・検収図鑑</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Collapsed Utility, Phase Jump & i2i Inspector Modal (Out of sight during combat) -->
+  <div id="i2i-modal">
+    <div class="modal-header">
+      <div>
+        <h3 style="color: var(--brass-bright);">設定・場面即時切替・i2i 検収図鑑</h3>
+        <p style="font-size: 0.76rem; color: var(--ivory-muted);">
+          操作: 任意位置ドラッグで1:1移動 / 上部ライン(y&lt;240)で全回収 / Shift: 低速集中ショット / X・2本指: 結界
+        </p>
+      </div>
+      <button class="thumb-btn" id="btn-close-modal" style="padding: 8px 18px; width: auto;">ゲームに戻る</button>
+    </div>
+
+    <div class="drawer-controls-bar">
+      <div class="phase-jump-grid">
+        <button class="phase-btn active" data-phase-jump="0">1. 道中：黒曜水路</button>
+        <button class="phase-btn" data-phase-jump="1">2. 中ボス：広目守護機</button>
+        <button class="phase-btn" data-phase-jump="2">3. ボス壱：黄金周転円</button>
+        <button class="phase-btn" data-phase-jump="3">4. ボス弐：開帳曼荼羅</button>
+        <button class="phase-btn" data-phase-jump="4">5. 最終神楽：常世の日輪</button>
+      </div>
+      <div class="toggles-row">
+        <button class="toggle-chip active" id="btn-immortal">無敵鑑賞: ON</button>
+        <button class="toggle-chip active" id="btn-sound">効果音 SFX: ON</button>
+      </div>
+    </div>
+
+    <div class="modal-grid">
+      <div class="modal-card">
+        <h4>1. Boss 8-Part Procedural Stencil Ref</h4>
+        <img src="refs/boss_parts_ref.png" alt="Boss Parts Ref" />
+      </div>
+      <div class="modal-card">
+        <h4>2. Boss Multi-Part Keyed Albedo Atlas (0.000 Fringe)</h4>
+        <img src="public/assets/boss_parts_atlas.png" alt="Boss Parts Keyed Atlas" />
+      </div>
+      <div class="modal-card">
+        <h4>3. Derived Tangent-Space Normal Map (Dynamic Lighting)</h4>
+        <img src="public/assets/boss_parts_normal.png" alt="Boss Parts Normal Map" />
+      </div>
+      <div class="modal-card">
+        <h4>4. Ships & Bestiary 12-Cell Stencil Ref</h4>
+        <img src="refs/ships_and_enemies_ref.png" alt="Ships Ref" />
+      </div>
+      <div class="modal-card">
+        <h4>5. Ships & Bestiary Keyed Albedo Atlas</h4>
+        <img src="public/assets/ships_and_enemies_atlas.png" alt="Ships Keyed Atlas" />
+      </div>
+      <div class="modal-card">
+        <h4>6. Stage 3D Blocking vs i2i Abyss & Sanctum Plates</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+          <img src="public/assets/stage_bg_abyss.png" alt="Stage Abyss" />
+          <img src="public/assets/stage_bg_sanctum.png" alt="Stage Sanctum" />
+        </div>
+      </div>
+      <div class="modal-card" style="grid-column: span 2;">
+        <h4>7. Quantitative Gate Audit (`public/assets/audit_report.json`)</h4>
+        <pre id="audit-json-pre"></pre>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

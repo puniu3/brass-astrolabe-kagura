@@ -1,0 +1,470 @@
+:root {
+  --bg-obsidian: #120e0c;
+  --panel-obsidian: rgba(20, 15, 12, 0.92);
+  --brass-bright: #e8c468;
+  --brass-mid: #b88a3c;
+  --brass-dark: #684a1e;
+  --vermilion: #e04a32;
+  --jade: #3ca874;
+  --ivory: #f6eedc;
+  --ivory-muted: #b8a88e;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #201611 0%, #0d0a08 100%);
+  color: var(--ivory);
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", Georgia, serif;
+}
+
+#app-shell {
+  display: flex;
+  width: 100vw;
+  height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 10px 14px;
+}
+
+/* Center Playfield Container (3:4 Vertical Arcade Ratio) — Zero UI Clutter */
+#playfield-frame {
+  position: relative;
+  height: min(96dvh, calc((100vw - 270px) * 1.3333));
+  aspect-ratio: 3 / 4;
+  border: 2px solid var(--brass-bright);
+  border-radius: 6px;
+  box-shadow:
+    0 0 0 2px var(--brass-dark),
+    0 14px 42px rgba(0, 0, 0, 0.85);
+  overflow: hidden;
+  background: #140f0d;
+  flex-shrink: 0;
+}
+
+#stg-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* Razor-slim Boss HP bar hugged to the very top rim (zero text or bottom overlap) */
+#boss-hud-wrap {
+  position: absolute;
+  top: 6px;
+  left: 12px;
+  right: 12px;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+#boss-hud-wrap.active {
+  opacity: 1;
+}
+
+#boss-hp-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(16, 12, 10, 0.85);
+  border: 1px solid rgba(232, 196, 104, 0.75);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+#boss-hp-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--jade) 0%, var(--brass-bright) 55%, var(--vermilion) 100%);
+  transition: width 0.08s linear;
+}
+
+/* Right HUD Sidebar: 4 Clean Visual Chunks inside i2i Ornamental Frame */
+#hud-sidebar {
+  width: 236px;
+  height: min(96dvh, 880px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 18px;
+  background-image:
+    linear-gradient(180deg, rgba(18, 14, 11, 0.88) 0%, rgba(14, 11, 9, 0.94) 100%),
+    url("../public/assets/hud_frame.png");
+  background-size: 100% 100%;
+  background-position: center;
+  border: 2px solid var(--brass-bright);
+  border-radius: 6px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.85);
+  flex-shrink: 0;
+}
+
+/* Chunk 1: Encounter Card & Boss Portrait (lives in sidebar, never blocks playfield) */
+#encounter-card {
+  background: rgba(12, 9, 8, 0.82);
+  border: 1px solid rgba(232, 196, 104, 0.42);
+  border-radius: 6px;
+  padding: 12px 12px;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+#encounter-card.cutin-pulse {
+  border-color: var(--brass-bright);
+  box-shadow: 0 0 18px rgba(232, 196, 104, 0.35);
+}
+
+#boss-portrait-wrap {
+  display: none;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--brass-mid);
+  height: 124px;
+  background: #120d0a;
+}
+
+#boss-portrait-wrap.visible {
+  display: block;
+}
+
+#cutin-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  display: block;
+}
+
+#phase-subtitle {
+  font-size: 0.70rem;
+  color: var(--ivory-muted);
+  letter-spacing: 0.06em;
+  margin-bottom: 3px;
+}
+
+#phase-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--brass-bright);
+  line-height: 1.3;
+}
+
+.scene-pills {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+  padding-top: 7px;
+  border-top: 1px solid rgba(232, 196, 104, 0.22);
+}
+
+.scene-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.64rem;
+  color: var(--ivory-muted);
+  letter-spacing: 0.08em;
+  margin-right: auto;
+}
+
+.scene-pill {
+  width: 24px;
+  height: 22px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ivory-muted);
+  background: rgba(24, 18, 14, 0.85);
+  border: 1px solid rgba(184, 138, 60, 0.45);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.scene-pill.active,
+.scene-pill:hover {
+  color: #fff;
+  background: rgba(196, 58, 42, 0.65);
+  border-color: var(--brass-bright);
+}
+
+/* Chunk 2 & 3: Clean Score & Vital Readouts */
+.hud-section {
+  background: rgba(12, 9, 8, 0.82);
+  border: 1px solid rgba(232, 196, 104, 0.35);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+
+.hud-row-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hud-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ivory-muted);
+  letter-spacing: 0.12em;
+}
+
+.hud-mult-badge {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #5cd69a;
+}
+
+.hud-score-val {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 1.38rem;
+  font-weight: 700;
+  color: var(--ivory);
+  margin-top: 4px;
+  letter-spacing: 0.03em;
+}
+
+.vital-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vital-icons {
+  font-size: 1.15rem;
+  letter-spacing: 0.18em;
+}
+
+.vital-icons.vermilion {
+  color: var(--vermilion);
+}
+
+.vital-icons.gold {
+  color: var(--brass-bright);
+}
+
+#hud-bomb-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+#hud-bomb-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--jade), var(--brass-bright));
+}
+
+/* Chunk 4: Right-Thumb Bomb Button + Quiet Utility Link */
+#thumb-dock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.thumb-btn {
+  width: 100%;
+  padding: 16px 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border-radius: 6px;
+  border: 2px solid var(--brass-bright);
+  cursor: pointer;
+  color: var(--ivory);
+  background: linear-gradient(180deg, rgba(168, 52, 34, 0.88), rgba(92, 24, 16, 0.95));
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.65);
+}
+
+.thumb-btn:active {
+  transform: scale(0.98);
+}
+
+.menu-trigger-btn {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 0.72rem;
+  color: var(--ivory-muted);
+  background: rgba(16, 12, 10, 0.75);
+  border: 1px solid rgba(184, 138, 60, 0.35);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.menu-trigger-btn:hover {
+  color: var(--brass-bright);
+  border-color: var(--brass-bright);
+}
+
+/* Collapsed Utility, Phase Jump & i2i Inspector Modal */
+#i2i-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 8, 6, 0.94);
+  z-index: 50;
+  display: none;
+  flex-direction: column;
+  padding: 20px 26px;
+  overflow-y: auto;
+}
+
+#i2i-modal.open {
+  display: flex;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--brass-mid);
+  margin-bottom: 14px;
+}
+
+.drawer-controls-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  background: #18120f;
+  border: 1px solid rgba(232, 196, 104, 0.35);
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+}
+
+.phase-jump-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.phase-btn {
+  padding: 7px 12px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--ivory);
+  background: rgba(28, 21, 17, 0.9);
+  border: 1px solid var(--brass-mid);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.phase-btn.active,
+.phase-btn:hover {
+  background: linear-gradient(90deg, rgba(196, 58, 42, 0.6), rgba(184, 138, 60, 0.5));
+  border-color: var(--brass-bright);
+  color: #fff;
+}
+
+.toggles-row {
+  display: flex;
+  gap: 8px;
+}
+
+.toggle-chip {
+  padding: 7px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ivory-muted);
+  background: rgba(20, 16, 14, 0.9);
+  border: 1px solid rgba(184, 138, 60, 0.45);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.toggle-chip.active {
+  color: var(--brass-bright);
+  border-color: var(--brass-bright);
+  background: rgba(62, 46, 22, 0.65);
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.modal-card {
+  background: #1a1411;
+  border: 1px solid var(--brass-mid);
+  border-radius: 7px;
+  padding: 10px;
+}
+
+.modal-card h4 {
+  font-size: 0.82rem;
+  color: var(--brass-bright);
+  margin-bottom: 6px;
+}
+
+.modal-card img {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #0d0a08;
+}
+
+#audit-json-pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  color: #d8c8a8;
+  max-height: 260px;
+  overflow: auto;
+  background: #0f0c0a;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+#loading-banner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(16, 12, 10, 0.92);
+  color: var(--brass-bright);
+  font-size: 1.05rem;
+  z-index: 10;
+}
+
+/* Portrait Tablet Adaptation */
+@media (max-width: 900px) {
+  #app-shell {
+    flex-direction: column;
+    gap: 8px;
+    padding: 6px;
+  }
+  #playfield-frame {
+    height: 74dvh;
+    width: auto;
+  }
+  #hud-sidebar {
+    width: min(96vw, 540px);
+    height: 22dvh;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 14px;
+    gap: 10px;
+  }
+  #boss-portrait-wrap {
+    display: none !important;
+  }
+}
